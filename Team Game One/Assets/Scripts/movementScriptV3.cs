@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class movementScriptV3 : MonoBehaviour
 {
 
     public float speed = 10f;
     public float JumpHeight = 10f;
+    public float drag = 4f;
     public bool InAir = false;
 
     private Rigidbody2D rb2d;
@@ -14,6 +15,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>(); //Makes sure that the rigid body can be called later
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -34,13 +36,13 @@ public class Movement : MonoBehaviour
         if (moveHorizontal > 0)
         {
             {
-                rb2d.velocity = new Vector2(speed, rb2d.velocity.y); //Right Movement
+                rb2d.velocity = new Vector2(speed, rb2d.velocity.y - drag); //Right Movement
 
             }
         }
         if (moveHorizontal < 0)
         {
-            rb2d.velocity = new Vector2(-speed, rb2d.velocity.y); //Left Movement
+            rb2d.velocity = new Vector2(-speed, rb2d.velocity.y - drag); //Left Movement
         }
 
         /*
